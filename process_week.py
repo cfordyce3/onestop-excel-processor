@@ -29,21 +29,21 @@ def row_thru (os,inws,outws) :
         r += 1
         c = sc
 
-def process_week (month='', week='', year=''):
+# given_dir should include ONLY up until \Statistics\
+def process_week (week='',month='',year=''):
 
-    if (month==''): month=input('What month? ')
-    if (week==''): week=str(input('What week? '))
-    if (year==''): year=input('What year? ')
+    if (week=='' and month=='' and year==''):
+        month=input('What month? '); week=str(input('What week? ')); year=input('What year? ')
 
     print()
 
-    out_file = 'C:\\Users\\fordy\\Desktop\\Work\\Statistics\\Master\\' + year + '\\Weekly\\' + month + '\\Week of ' + month + ' ' + week + ', ' + year + '.xlsx'
+    out_file = 'C:\\Users\\fordy\\Desktop\\One Stop GitHub\\onestop-excel-processor\\Statistics\\Master\\' + year + '\\Weekly\\' + month + '\\Week of ' + month + ' ' + week + ', ' + year + '.xlsx'
     outwb = load_workbook(filename = out_file)
 
     print('[' + week + ' ' + month + ', ' + year + ']')
 
     for os_num in range(0,5):
-        in_file = 'C:\\Users\\fordy\\Desktop\\Work\\Statistics\\'
+        in_file = 'C:\\Users\\fordy\\Desktop\\One Stop GitHub\\onestop-excel-processor\\Statistics\\'
         if (os_num == 0):
             print('Processing Low Desk... ', end='')
             in_file += 'Low Desk\\' + year + '\\' + month + '\\LD Week of ' + month + ' ' + week + ', ' + year + '.xlsx'
@@ -68,7 +68,7 @@ def process_week (month='', week='', year=''):
         print('Done.')
 
     # determine save file and saves file
-    save_file = 'C:\\Users\\fordy\\Desktop\\Work\\Statistics\\Master\\' + year + '\\Weekly\\' + month + '\\COPY Week of ' + month + ' ' + week + ', ' + year + '.xlsx'
+    save_file = 'C:\\Users\\fordy\\Desktop\\One Stop GitHub\\onestop-excel-processor\\Statistics\\Master\\' + year + '\\Weekly\\' + month + '\\COPY Week of ' + month + ' ' + week + ', ' + year + '.xlsx'
     outwb.save(save_file)
 
 #process_week('September','2','2019')
