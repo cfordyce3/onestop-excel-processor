@@ -37,13 +37,13 @@ def process_week (week='',month='',year=''):
 
     print()
 
-    out_file = 'C:\\Users\\fordy\\Desktop\\One Stop GitHub\\onestop-excel-processor\\Statistics\\Master\\' + year + '\\Weekly\\' + month + '\\Week of ' + month + ' ' + week + ', ' + year + '.xlsx'
+    out_file = 'C:\\Users\\Chas\\Documents\\GitHub\\onestop-excel-processor\\Statistics\\Master\\' + year + '\\Weekly\\' + month + '\\Week of ' + month + ' ' + week + ', ' + year + '.xlsx'
     outwb = load_workbook(filename = out_file)
 
     print('[' + week + ' ' + month + ', ' + year + ']')
 
     for os_num in range(0,5):
-        in_file = 'C:\\Users\\fordy\\Desktop\\One Stop GitHub\\onestop-excel-processor\\Statistics\\'
+        in_file = 'C:\\Users\\Chas\\Documents\\GitHub\\onestop-excel-processor\\Statistics\\'
         if (os_num == 0):
             print('Processing Low Desk... ', end='')
             in_file += 'Low Desk\\' + year + '\\' + month + '\\LD Week of ' + month + ' ' + week + ', ' + year + '.xlsx'
@@ -68,7 +68,7 @@ def process_week (week='',month='',year=''):
         print('Done.')
 
     # determine save file and saves file
-    save_file = 'C:\\Users\\fordy\\Desktop\\One Stop GitHub\\onestop-excel-processor\\Statistics\\Master\\' + year + '\\Weekly\\' + month + '\\COPY Week of ' + month + ' ' + week + ', ' + year + '.xlsx'
+    save_file = 'C:\\Users\\Chas\\Documents\\GitHub\\onestop-excel-processor\\Statistics\\Master\\' + year + '\\Weekly\\' + month + '\\COPY Week of ' + month + ' ' + week + ', ' + year + '.xlsx'
     outwb.save(save_file)
 
 #process_week('September','2','2019')

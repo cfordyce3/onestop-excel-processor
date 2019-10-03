@@ -5,7 +5,7 @@ def process_month (year='', month=''):
     if (month==''): year=input('What year? ')
     if (month==''): month=input('What month? ')
 
-    for file in os.listdir('C:\\Users\\fordy\\Desktop\\One Stop GitHub\\onestop-excel-processor\\Statistics\\Master\\' + str(year) + '\\Weekly\\' + month):
+    for file in os.listdir('C:\\Users\\Chas\\Documents\\GitHub\\onestop-excel-processor\\Statistics\\Master\\' + str(year) + '\\Weekly\\' + month):
         day = file.strip('Week of ' + month + ' ')
         day = day.rstrip(str(year) + '.xlsx')
         day = day.strip(", ")
