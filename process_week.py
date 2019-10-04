@@ -29,26 +29,29 @@ def row_thru (os,inws,outws) :
         r += 1
         c = sc
 
-# given_dir should include ONLY up until \Statistics\
-def process_week (week='',month='',year=''):
+def process_week (week='',month='',year='',show_info=False):
 
     if (week=='' and month=='' and year==''):
         month=input('What month? '); week=str(input('What week? ')); year=input('What year? ')
 
-    print()
+    if (show_info == True):
+        print()
 
     out_file = 'C:\\Users\\fordy\\Desktop\\One Stop GitHub\\onestop-excel-processor\\Statistics\\Master\\' + year + '\\Weekly\\' + month + '\\Week of ' + month + ' ' + week + ', ' + year + '.xlsx'
     outwb = load_workbook(filename = out_file)
 
-    print('[' + week + ' ' + month + ', ' + year + ']')
+    if (show_info == True):
+        print('[' + week + ' ' + month + ', ' + year + ']')
 
     for os_num in range(0,5):
         in_file = 'C:\\Users\\fordy\\Desktop\\One Stop GitHub\\onestop-excel-processor\\Statistics\\'
         if (os_num == 0):
-            print('Processing Low Desk... ', end='')
+            if (show_info == True):
+                print('Processing Low Desk... ', end='')
             in_file += 'Low Desk\\' + year + '\\' + month + '\\LD Week of ' + month + ' ' + week + ', ' + year + '.xlsx'
         else:
-            print('Processing OS' + str(os_num) + '... ', end='')
+            if (show_info == True):
+                print('Processing OS' + str(os_num) + '... ', end='')
             in_file += 'OS' + str(os_num) + '\\' + year + '\\' + month + '\\OS' + str(os_num) + ' Week of ' + month + ' ' + week + ', ' + year + '.xlsx'
 
         try:
@@ -56,7 +59,8 @@ def process_week (week='',month='',year=''):
             f = open(in_file)
             f.close()
         except FileNotFoundError:
-            print('FILE NOT FOUND. DATA NOT COMPILED!')
+            if (show_info == True):
+                print('FILE NOT FOUND. DATA NOT COMPILED!')
             continue
 
         inwb = load_workbook(filename = in_file, data_only = True)
@@ -65,10 +69,11 @@ def process_week (week='',month='',year=''):
             outws = outwb[sheet_num]
             row_thru(os_num,inws,outws)
 
-        print('Done.')
+        if (show_info == True):
+            print('Done.')
 
     # determine save file and saves file
-    save_file = 'C:\\Users\\fordy\\Desktop\\One Stop GitHub\\onestop-excel-processor\\Statistics\\Master\\' + year + '\\Weekly\\' + month + '\\COPY Week of ' + month + ' ' + week + ', ' + year + '.xlsx'
+    save_file = 'C:\\Users\\fordy\\Desktop\\One Stop GitHub\\onestop-excel-processor\\Statistics\\Master\\' + year + '\\Weekly\\' + month + '\\Week of ' + month + ' ' + week + ', ' + year + '.xlsx'
     outwb.save(save_file)
 
-#process_week('September','2','2019')
+#process_week('12','August','2019')
