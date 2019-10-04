@@ -36,4 +36,4 @@ def process_month (year='', month=''):
     print('Data for ' + month + ', ' + str(year) + ' has been completed.')
     print()
 
-process_month()
+#process_month()
