@@ -1,4 +1,7 @@
+import os
 from openpyxl import load_workbook
+
+FILE_DIR = os.path.dirname(os.path.realpath(__file__))
 
 sheet_day = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
 
@@ -64,11 +67,11 @@ def row_thru_correct (os,inws,outws) :
 
 def error_correct (week,month,year):
 
-    out_file = 'C:\\Users\\fordy\\Desktop\\One Stop GitHub\\onestop-excel-processor\\Statistics\\Master\\' + year + '\\Weekly\\' + month + '\\Week of ' + month + ' ' + week + ', ' + year + '.xlsx'
+    out_file = FILE_DIR + '\\Statistics\\Master\\' + year + '\\Weekly\\' + month + '\\Week of ' + month + ' ' + week + ', ' + year + '.xlsx'
     outwb = load_workbook(filename = out_file)
 
     for os_num in range(0,5):
-        in_file = 'C:\\Users\\fordy\\Desktop\\One Stop GitHub\\onestop-excel-processor\\Statistics\\'
+        in_file = FILE_DIR + '\\Statistics\\'
         if (os_num == 0):
             in_file += 'Low Desk\\' + year + '\\' + month + '\\LD Week of ' + month + ' ' + week + ', ' + year + '.xlsx'
         else:
@@ -80,14 +83,14 @@ def error_correct (week,month,year):
             outws = outwb[sheet_num]
             row_thru_correct(os_num,inws,outws)
 
-    save_file = 'C:\\Users\\fordy\\Desktop\\One Stop GitHub\\onestop-excel-processor\\Statistics\\Master\\' + year + '\\Weekly\\' + month + '\\Week of ' + month + ' ' + week + ', ' + year + '.xlsx'
+    save_file = FILE_DIR + '\\Statistics\\Master\\' + year + '\\Weekly\\' + month + '\\Week of ' + month + ' ' + week + ', ' + year + '.xlsx'
     outwb.save(save_file)
 
 def error_check (day='', month='', year='',show_info=False):
 
     error_found = False
 
-    file = 'C:\\Users\\fordy\\Desktop\\One Stop GitHub\\onestop-excel-processor\\Statistics\\Master\\' + year + '\\Weekly\\' + month + '\\Week of ' + month + ' ' + day + ', ' + year + '.xlsx'
+    file = FILE_DIR + '\\Statistics\\Master\\' + year + '\\Weekly\\' + month + '\\Week of ' + month + ' ' + day + ', ' + year + '.xlsx'
     wb = load_workbook(filename=file, data_only=True)
 
     for os_num in range(0,5):
@@ -103,11 +106,3 @@ def error_check (day='', month='', year='',show_info=False):
                 print()
 
     return error_found
-
-#wb = load_workbook(filename='C:\\Users\\fordy\\Desktop\\One Stop GitHub\\onestop-excel-processor\\Statistics\\Master\\2019\\Weekly\\August\\Week of August 12, 2019.xlsx', data_only=True)
-#ws = wb['Wednesday']
-#row_thru_correct(0,ws,True)
-
-#error_check('19','August','2019',True)
-
-error_correct('19','August','2019')

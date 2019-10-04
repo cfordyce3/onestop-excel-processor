@@ -1,6 +1,8 @@
 # import required libraries
+import os
 from openpyxl import load_workbook
-import sys
+
+FILE_DIR = os.path.dirname(os.path.realpath(__file__))
 
 # set variables
 sheet_day = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
@@ -37,14 +39,14 @@ def process_week (week='',month='',year='',show_info=False):
     if (show_info == True):
         print()
 
-    out_file = 'C:\\Users\\fordy\\Desktop\\One Stop GitHub\\onestop-excel-processor\\Statistics\\Master\\' + year + '\\Weekly\\' + month + '\\Week of ' + month + ' ' + week + ', ' + year + '.xlsx'
+    out_file = FILE_DIR + '\\Statistics\\Master\\' + year + '\\Weekly\\' + month + '\\Week of ' + month + ' ' + week + ', ' + year + '.xlsx'
     outwb = load_workbook(filename = out_file)
 
     if (show_info == True):
         print('[' + week + ' ' + month + ', ' + year + ']')
 
     for os_num in range(0,5):
-        in_file = 'C:\\Users\\fordy\\Desktop\\One Stop GitHub\\onestop-excel-processor\\Statistics\\'
+        in_file = FILE_DIR + '\\Statistics\\'
         if (os_num == 0):
             if (show_info == True):
                 print('Processing Low Desk... ', end='')
@@ -73,7 +75,7 @@ def process_week (week='',month='',year='',show_info=False):
             print('Done.')
 
     # determine save file and saves file
-    save_file = 'C:\\Users\\fordy\\Desktop\\One Stop GitHub\\onestop-excel-processor\\Statistics\\Master\\' + year + '\\Weekly\\' + month + '\\Week of ' + month + ' ' + week + ', ' + year + '.xlsx'
+    save_file = FILE_DIR + '\\Statistics\\Master\\' + year + '\\Weekly\\' + month + '\\Week of ' + month + ' ' + week + ', ' + year + '.xlsx'
     outwb.save(save_file)
 
 #process_week('12','August','2019')
