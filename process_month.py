@@ -24,7 +24,7 @@ def process_month (year='', month=''):
     # error checking
     print('Error checking processed files.')
     for file in files:
-        if (error_check(day,month,year) == True):
+        if (error_check(file[0],file[1],file[2]) == True):
             print(' ~ Errors found in \'' + str(file) + '\' Correcting... ', end = '')
             error_correct(day,month,year)
             print('Done.')
