@@ -78,4 +78,4 @@ def process_week (week='',month='',year='',show_info=False):
     save_file = FILE_DIR + '\\Statistics\\Master\\' + year + '\\Weekly\\' + month + '\\Week of ' + month + ' ' + week + ', ' + year + '.xlsx'
     outwb.save(save_file)
 
-#process_week('12','August','2019')
+#process_week('26','August','2019')

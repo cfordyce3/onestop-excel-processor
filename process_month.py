@@ -29,7 +29,7 @@ def process_month (year='', month=''):
     for file in files:
         if (error_check(file[0],file[1],file[2]) == True):
             print(' ~ Errors found in \'' + str(file) + '\' Correcting... ', end = '')
-            error_correct(day,month,year)
+            error_correct(file[0],file[1],file[2])
             print('Done.')
 
     print()

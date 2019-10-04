@@ -106,3 +106,6 @@ def error_check (day='', month='', year='',show_info=False):
                 print()
 
     return error_found
+
+#error_check('26','August','2019',True)
+#error_correct('26','August','2019')
