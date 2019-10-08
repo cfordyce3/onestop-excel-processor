@@ -58,6 +58,7 @@ startup_text = tk.Label(root, text='Which would you like to process?')
 page2text = tk.Label(root, text="This is page 2")
 
 # first page checkboxes
+# SHOULD NOT BE CHECKBOXES, SHOULD ONLY SELECT ONE
 weekly_onoff = tk.IntVar()
 weekly_box = tk.Checkbutton(root,text='Weekly',variable=weekly_onoff,onvalue=1,offvalue=0)
 
