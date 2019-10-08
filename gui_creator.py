@@ -1,69 +1,71 @@
-from tkinter import *
+import tkinter as tk
+from process_month import process_month
 
 WINDOW_WIDTH = 500
 WINDOW_HEIGHT = 300
 
-def next_button (which_next,weekly,monthly,quarterly):
-    second_window(weekly,monthly,quarterly)
+def startup ():
+    startup_text.pack()
+    weekly_box.pack()
+    monthly_box.pack()
+    quarterly_box.pack()
+    next_button.pack()
+    cancel_button.pack()
 
 
+def startup_page():
+    cancel_button.pack_forget()
+    page2text.pack_forget()
+    back_button.pack_forget()
 
-def second_window (weekly,monthly,quarterly):
-    root = Tk()
+    startup_text.pack()
+    weekly_box.pack()
+    monthly_box.pack()
+    quarterly_box.pack()
+    next_button.pack()
+    cancel_button.pack()
 
-    # title and icon
-    root.title('One Stop Excel Processor')
+def page2():
+    cancel_button.pack_forget()
+    startup_text.pack_forget()
+    next_button.pack_forget()
+    weekly_box.pack_forget()
+    monthly_box.pack_forget()
+    quarterly_box.pack_forget()
 
-    # screen size and position formatting
-    pos_right = int(root.winfo_screenwidth()/2 - WINDOW_WIDTH/2)
-    pos_down = int(root.winfo_screenheight()/2 - WINDOW_HEIGHT)
-    root.geometry('{}x{}+{}+{}'.format(WINDOW_WIDTH,WINDOW_HEIGHT,pos_right,pos_down))
+    page2text.pack()
+    back_button.pack()
+    cancel_button.pack()
 
-    # cancel and next buttons
-    cancel_button = Button(root,text='Cancel',command=root.destroy)
-    cancel_button.grid(row=4,column=0,ipadx=25)
+root = tk.Tk()
 
-    next_button = Button(root,text='Next')
-    next_button.grid(row=4,column=2,ipadx=25)
-
-root = Tk()
-
-# title and icon
-root.title('One Stop Excel Processor')
-
-# screen size and position formatting
+# window size
 pos_right = int(root.winfo_screenwidth()/2 - WINDOW_WIDTH/2)
 pos_down = int(root.winfo_screenheight()/2 - WINDOW_HEIGHT)
 root.geometry('{}x{}+{}+{}'.format(WINDOW_WIDTH,WINDOW_HEIGHT,pos_right,pos_down))
 
-# checkboxes for weekly, monthly, and quarterly processing
-weekly_onoff = IntVar()
-weekly_box = Checkbutton(root,text='Weekly',variable=weekly_onoff,onvalue=1,offvalue=0)
-weekly_box.grid(row=1,column=1,sticky=W)
+# window title and icon
+root.title('One Stop Excel Processor')
+root.iconbitmap('scu.ico')
 
-monthly_onoff = IntVar()
-monthly_box = Checkbutton(root,text='Montly',variable=monthly_onoff,onvalue=1,offvalue=0)
-monthly_box.grid(row=2,column=1,sticky=W)
+# next, back, cancel buttons
+cancel_button = tk.Button(root,text='Cancel',command=root.destroy)
+next_button = tk.Button(root,text='Next',command=page2)
+back_button = tk.Button(root,text='Back',command=startup_page)
 
-quarterly_onoff = IntVar()
-quarterly_box = Checkbutton(root,text='Quarterly',variable=quarterly_onoff,onvalue=1,offvalue=0)
-quarterly_box.grid(row=3,column=1,sticky=W)
+# labels
+startup_text = tk.Label(root, text='Which would you like to process?')
+page2text = tk.Label(root, text="This is page 2")
 
-# label for the question boxes
-which_processing = Label(root,text='Which would you like to process?')
-which_processing.grid(row=0,column=1)
+# first page checkboxes
+weekly_onoff = tk.IntVar()
+weekly_box = tk.Checkbutton(root,text='Weekly',variable=weekly_onoff,onvalue=1,offvalue=0)
 
-# cancel and next buttons
-cancel_button = Button(root,text='Cancel',command=root.destroy)
-cancel_button.grid(row=4,column=0,ipadx=25)
+monthly_onoff = tk.IntVar()
+monthly_box = tk.Checkbutton(root,text='Montly',variable=monthly_onoff,onvalue=1,offvalue=0)
 
-next_button = Button(root,text='Next',command=lambda:[root.destroy,next_button(root,weekly_onoff,monthly_onoff,quarterly_onoff)])
-next_button.grid(row=4,column=2,ipadx=25)
+quarterly_onoff = tk.IntVar()
+quarterly_box = tk.Checkbutton(root,text='Quarterly',variable=quarterly_onoff,onvalue=1,offvalue=0)
 
-# overall formatting
-root.grid_rowconfigure(0,weight=1)
-root.grid_rowconfigure(4,weight=1)
-root.grid_columnconfigure(0, weight=1)
-root.grid_columnconfigure(2, weight=1)
-
+startup()
 root.mainloop()
