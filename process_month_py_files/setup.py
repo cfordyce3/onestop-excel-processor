@@ -7,4 +7,8 @@ base = None
 if (sys.platform == 'win32'):
     base = 'Win32GUI'
 
-setup (name = 'Process Month', version = '1', description = 'Process month application for One Stop', options = {'build_exe':build_exe_options}, executables = [Executable('process_month_gui.py', base=base)])
+setup (name = 'Process Month',
+       version = '1',
+       description = 'Process month application for One Stop',
+       options = {'build_exe':build_exe_options},
+       executables = [Executable('process_month_gui_standard.py', base=base)])
