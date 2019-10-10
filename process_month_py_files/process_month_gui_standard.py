@@ -55,11 +55,11 @@ Button(root,text='Close',command=root.destroy).grid(row=3,column=1,sticky=W)
 
 def run_process_month (month,year):
     process_month(month,year)
-    if (developer==1):
-        print('Done')
+    #if (developer==1):
+    #    print('Done')
 
 # process button
-Button(root,text='Process',command=lambda:run_process_month(month.get(),year.get(),developer_mode.get())).grid(row=3,column=2,sticky=E)
+Button(root,text='Process',command=lambda:run_process_month(month.get(),year.get())).grid(row=3,column=2,sticky=E) #removed developer_mode.get()
 
 
 root.mainloop()

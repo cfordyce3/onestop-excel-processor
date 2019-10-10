@@ -7,15 +7,20 @@ months = {'January':1,'February':2,'March':3,'April':4,'May':5,'June':6,'July':7
 def create_list_of_inputs (start_week='',start_month='',start_year='',end_week='',end_month='',end_year='',show_info=False):
     start_month_val = months[start_month]
     end_month_val = months[end_month]
-    print (start_month_val)
-    print (end_month_val)
+
     inputs = []
 
     if (start_year==end_year):
-        for month in months:
-            if (month.value() >= start_month_val and month.value() <= end_month_val):
-                for file in os.listdir(FILE_DIR + '\\Statistics\\Master\\' + str(year) + '\\Weekly\\' + month.key()):
-                    print(file)
+        for month_name,month_num in months.items():
+            if (month_num >= start_month_val and month_num <= end_month_val):
+                month_list = []
+                for file in os.listdir(FILE_DIR + '\\Statistics\\Master\\' + str(start_year) + '\\Weekly\\' + month_name):
+                    #print(file)
+                    month_list.append(file)
+                print(month_list)
+                #month_list.sort()
+                print(month_list.sorted())
+
 
 def process_quarter (season='',start_week='',start_month='',start_year='',end_week='',end_month='',end_year='',show_info=False):
     if (season=='' and start_week=='' and start_month=='' and start_year=='' and end_week=='' and end_month=='' and end_year==''):

@@ -1,7 +1,7 @@
 import sys
 from cx_Freeze import setup, Executable
 
-build_exe_options = {'packages': ['os','tkinter','openpyxl'], 'include_files': ['scu.ico']}
+build_exe_options = {'build_exe':'..\\process_month\\','excludes':['process_month_gui_developer.py'],'packages': ['os','tkinter','openpyxl'], 'include_files': ['scu.ico']}
 
 base = None
 if (sys.platform == 'win32'):
