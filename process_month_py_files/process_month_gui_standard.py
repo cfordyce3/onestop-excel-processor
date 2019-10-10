@@ -1,8 +1,8 @@
 from process_month import process_month
 from tkinter import *
 
-WINDOW_WIDTH = 500
-WINDOW_HEIGHT = 300
+WINDOW_WIDTH = 400
+WINDOW_HEIGHT = 200
 
 YEARS = ['2019', '2020', '2021',
          '2022', '2023', '2024',
