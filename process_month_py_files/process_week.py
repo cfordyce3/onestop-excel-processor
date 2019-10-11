@@ -2,6 +2,7 @@
 import os
 from openpyxl import load_workbook
 
+# set working directory to the directory above where this file is located
 FILE_DIR = os.path.abspath('..')
 
 # set variables
@@ -27,7 +28,6 @@ def row_thru (os,inws,outws) :
         for cell in row:
             outws.cell(row = r, column = c, value = cell.value)
             c += 1
-
         r += 1
         c = sc
 
