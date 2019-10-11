@@ -77,16 +77,18 @@ def create_pie_chart (ws):
             cell.value = None
 
 
-def row_thru (outwb,year,month,filename,show_info=False):
+def row_thru (outws_read,year,month,filename,show_info=False):
+
+    # input workbook
     in_file = FILE_DIR + '\\Statistics\\Master\\' + year + '\\Weekly\\' + month + '\\' + filename
     inwb = load_workbook(filename=in_file,data_only=True)
-    inws = inwb['Weekly Stats']
 
+    # get name for sheet name
     ws_name_from_filename = filename.rstrip('.xlsx')
-    outws = find_worksheet(outwb,ws_name_from_filename)
+    # make a new workbook, don't edit current ones
+    #outws = find_worksheet(outwb_read,ws_name_from_filename)
 
-    if (outws == False):
-        outws = outwb.copy_worksheet(outwb['111111'])
+    outws = outwb.copy_worksheet(outwb['111111'])
 
     outws.title = ws_name_from_filename
     if (show_info==True): print(outws.title)
@@ -104,7 +106,6 @@ def row_thru (outwb,year,month,filename,show_info=False):
         if (show_info==True): print()
     if (show_info==True): input('Continue? ')
 '''
-    #print(outws._charts)
 
     #create_pie_chart(outws)
 
@@ -114,9 +115,14 @@ def process_quarter (season='',start_week='',start_month='',start_year='',end_we
         end_month=input('What ending month? '); end_week=str(input('What ending week? ')); end_year=input('What ending year? ')
         season=input('What season are we processing? ')
 
-    # set the output file directory and load the workbook
-    out_file = FILE_DIR + '\\Statistics\\Master\\' + end_year + '\\Quarterly\\' + season + ' ' + end_year + '.xlsx'
-    outwb = load_workbook(filename = out_file)
+    # set the output file directory and load the workbook to obtain the '111111' sheet for formatting
+    out_file_read = FILE_DIR + '\\Statistics\\Master\\2019\\Quarterly\\Spring 2019.xlsx'
+    outwb_read = load_workbook(filename = out_file_read)
+    outws_read = outwb_read['Weekly Stats']
+
+    # output of the new file which will overwrite the
+    out_file_write = FILE_DIR + '\\Statistics\\Master\\' + end_year + '\\Quarterly\\' + season + ' ' + end_year + '.xlsx'
+    outwb_write = Workbook()
 
     # retrieve the files between the dates selected
     input_files = create_dict_of_inputs(start_week,start_month,start_year,end_week,end_month,end_year)
@@ -125,11 +131,11 @@ def process_quarter (season='',start_week='',start_month='',start_year='',end_we
         for month,actual_files in month_list.items():
             for file in actual_files:
                 if (show_info==True): print('Processing: ' + file,end=' ... '); print()
-                row_thru(outwb,year,month,file,show_info)
+                row_thru(outws_read,year,month,file,show_info)
                 if (show_info==True): print('Done.')
 
 
-    outwb.save(out_file)
+    outwb_write.save(out_file_write)
 
 
 #create_dict_of_inputs('20','June','2019','9','September','2019',True)
