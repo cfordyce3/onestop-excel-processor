@@ -7,13 +7,13 @@ base = None
 if (sys.platform == 'win32'):
     base = 'Win32GUI'
 
-exec = Executable('process_month_gui_standard.py',
+exec = Executable('process_month_gui.py',
                   targetName = 'process_month.exe',
                   base = base,
                   icon = 'scu.ico')
 
 setup (name = 'Process Month',
-       version = '1.0',
+       version = '1.1',
        description = 'Process month application for One Stop',
        options = {'build_exe':build_exe_options},
        executables = [exec])

@@ -1,6 +1,5 @@
 TO DO:
 
- - Fix some data not being transferred (August 12??)
  - Fix for multiple years
 
  - Create gui for process_quarter
@@ -10,4 +9,5 @@ TO DO:
 
  - Finish README
 
-
+DONE:
+ - Fix some data not being transferred (August 12??)

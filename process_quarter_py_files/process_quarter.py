@@ -81,18 +81,6 @@ def row_thru (outwb,year,month,filename,first,show_info=False):
         if (show_info==True): print()
     if (show_info==True): input('Continue? ')
 
-#'''
-'''
-wb = load_workbook(filename='C:\\Users\\Chas\\Documents\\GitHub\\onestop-excel-processor\\Statistics\\Master\\2019\\Weekly\\August\\Week of August 26, 2019.xlsx',data_only=True)
-ws = wb['Weekly Stats']
-
-for x in range(2,15):
-    for y in range(38,41):
-        print(ws.cell(row=y,column=x).value)
-
-'''
-#'''
-
 def process_quarter (season='',start_week='',start_month='',start_year='',end_week='',end_month='',end_year='',show_info=False):
     if (season=='' and start_week=='' and start_month=='' and start_year=='' and end_week=='' and end_month=='' and end_year==''):
         start_month=input('What starting month? '); start_week=str(input('What starting week? ')); start_year=input('What starting year? ')
@@ -114,10 +102,9 @@ def process_quarter (season='',start_week='',start_month='',start_year='',end_we
                 if (show_info==True): print('Done.')
                 first=False
 
-
     outwb.save(out_file_name)
 
 
 #create_dict_of_inputs('20','June','2019','9','September','2019',True)
-#process_quarter('Summer','20','June','2019','9','September','2019',False)
-process_quarter('Test','5','August','2019','26','August','2019',False)
+#process_quarter('Summer_test','20','June','2019','9','September','2019',False)
+#process_quarter('Test','5','August','2019','26','August','2019',False)
