@@ -49,7 +49,6 @@ def set_default_variables (ws):
     ws['H1'] = 'Registrar'
     ws['K1'] = 'Other'
 
-
     # horizontal | second row
     ws['B2'] = 'Walk-Ins'
     ws['C2'] = 'Phones'
@@ -68,16 +67,11 @@ def set_default_colors (ws):
     ws['A1'].font = Font(size=14,bold=True,underline='single')
     ws['A1'].fill = PatternFill(patternType='solid',fill_type='solid',fgColor=Color('B1A0C7'))
 
-    #try if the style already exists
+    first_row = ['B1','E1','H1','K1']
+    for cell in first_row:
+        ws[cell].alignment = Alignment(horizontal='center',vertical='bottom')
+        ws[cell].fill = PatternFill(patternType='solid',fill_type='solid',fgColor=Color('92CDDC'))
 
-    first_row_style = NamedStyle(name='toprow',
-                                 alignment=Alignment(horizontal='center',vertical='bottom'),
-                                 fill=PatternFill(patternType='solid',fill_type='solid',fgColor=Color('92CDDC')))
-
-    ws['B1'].style = first_row_style
-    ws['E1'].style = 'toprow'
-    ws['H1'].style = 'toprow'
-    ws['K1'].style = 'toprow'
 
     second_row_fill = PatternFill(patternType='solid',fill_type='solid',fgColor=Color('C4D79B'))
     for col in range(2,14):
@@ -88,13 +82,12 @@ def set_default_colors (ws):
         ws.cell(column=1,row=row).fill = first_col_fill
 
     white_font = Font(color='FFFFFF')
-    black_style = NamedStyle(name='black',
-                             alignment=Alignment(horizontal='center',vertical='bottom'),
-                             font=white_font,
-                             fill=PatternFill(patternType='solid',fill_type='solid',fgColor=Color('000000')))
+
     blacks = [9,15,21,27]
     for row in blacks:
-        ws.cell(column=1,row=row).style = black_style
+        ws.cell(column=1,row=row).alignment = Alignment(horizontal='center',vertical='bottom')
+        ws.cell(column=1,row=row).font = white_font
+        ws.cell(column=1,row=row).fill = PatternFill(patternType='solid',fill_type='solid',fgColor=Color('000000'))
 
     blue_fill = PatternFill(patternType='solid',fill_type='solid',fgColor=Color('538DD5'))
     blues = [10,16,22,28]
@@ -159,7 +152,6 @@ def create_pie_chart (ws):
     pie_chart.dataLabels.showPercent = True
 
     ws.add_chart(pie_chart,'D9')
-
 
 def create_spreadsheet (ws):
     # set values for first table

@@ -1,6 +1,7 @@
 # import required libraries
 import os
 from openpyxl import load_workbook
+from openpyxl.utils.cell import get_column_letter
 
 # set working directory to the directory above where this file is located
 FILE_DIR = os.path.abspath('..')
@@ -30,6 +31,45 @@ def row_thru (os,inws,outws) :
             c += 1
         r += 1
         c = sc
+
+# correct the totals at the end
+def correct_totals (wb):
+    # correct the daily sheets
+    for sheet_name in sheet_day:
+        ws = wb[sheet_name]
+        for x in range(2,15):
+            for y in range(51,55):
+                ws.cell(row=y,column=x).value = '=SUM(' + ws.cell(row=y-48,column=x).coordinate + '+' + ws.cell(row=y-39,column=x).coordinate + '+' + ws.cell(row=y-30,column=x).coordinate + '+' + ws.cell(row=y-21,column=x).coordinate + '+' + ws.cell(row=y-12,column=x).coordinate + ')'
+
+    # correct the weekly stats section up to the final total section
+    multiplier = 0
+    for sheet_name in sheet_day:
+        ws = wb['Weekly Stats']
+
+        for x in range(2,15):
+            y_source = 51
+            for y in range(3+(multiplier*7),7+(multiplier*7)):
+                if (y != (7+(multiplier*7)-1)):
+                    ws.cell(row=y,column=x).value = str('=' + sheet_name + '!' + get_column_letter(x) + str(y_source))
+                    y_source += 1
+                else:
+                    ws.cell(row=y,column=x).value = str('=SUM(' + get_column_letter(x) + str(y-3) + ':' + get_column_letter(x) + str(y-1) + ')')
+        multiplier += 1
+
+        # set up final total section at the bottom of the sheet
+        for x in range(2,15):
+            for y in range(38,42):
+                if (y != 41):
+                    ws.cell(row=y,column=x).value = str('=SUM(' + get_column_letter(x) + str(y-35) + ',' + get_column_letter(x) + str(y-28) + ',' + get_column_letter(x) + str(y-21) + ',' + get_column_letter(x) + str(y-14) + ',' + get_column_letter(x) + str(y-7) + ')')
+                else:
+                    ws.cell(row=y,column=x).value = str('=SUM(' + get_column_letter(x) + str(y-3) + ':' + get_column_letter(x) + str(y-1) + ')')
+
+
+#wb = load_workbook(filename='C:\\Users\\Chas\\Documents\\GitHub\\onestop-excel-processor\\Statistics\\Master\\2019\\Weekly\\August\\Week of August 26, 2019.xlsx')
+#correct_totals(wb)
+#wb.save('C:\\Users\\Chas\\Documents\\GitHub\\onestop-excel-processor\\Statistics\\Master\\2019\\Weekly\\August\\Week of August 26, 2019.xlsx')
+
+
 
 def process_week (week='',month='',year='',show_info=False):
 
@@ -65,16 +105,21 @@ def process_week (week='',month='',year='',show_info=False):
             continue
 
         inwb = load_workbook(filename = in_file, data_only = True)
-        for sheet_num in sheet_day:
-            inws = inwb[sheet_num]
-            outws = outwb[sheet_num]
+        for sheet_name in sheet_day:
+            inws = inwb[sheet_name]
+            outws = outwb[sheet_name]
             row_thru(os_num,inws,outws)
 
         if (show_info == True):
             print('Done.')
 
+
+    correct_totals(outwb)
+
     # determine save file and saves file
     save_file = FILE_DIR + '\\Statistics\\Master\\' + year + '\\Weekly\\' + month + '\\Week of ' + month + ' ' + week + ', ' + year + '.xlsx'
     outwb.save(save_file)
+
+
 
 #process_week('26','August','2019')
