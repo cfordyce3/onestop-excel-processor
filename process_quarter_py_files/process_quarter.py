@@ -1,7 +1,6 @@
 import os
-import copy
-from openpyxl import load_workbook
-from openpyxl.chart import PieChart3D, Reference
+from openpyxl import Workbook, load_workbook
+from create_spreadsheet import create_spreadsheet
 
 FILE_DIR = os.path.abspath('..')
 months = {'January':1,'February':2,'March':3,'April':4,'May':5,'June':6,'July':7,'August':8,'September':9,'October':10,'November':11,'December':12}
@@ -46,51 +45,19 @@ def find_worksheet (wb,ws_name):
 
     return False
 
-def create_pie_chart (ws):
-    pie_chart = PieChart3D()
-
-    data = [['Bursar',        ws.cell(row=10,column=2).value],
-            ['Financial Aid', ws.cell(row=11,column=2).value],
-            ['Registrar',     ws.cell(row=12,column=2).value],
-            ['Other',         ws.cell(row=13,column=2).value]]
-
-    r = 20; c = 2
-    for row in data:
-        ws.cell(row=r,column=c,value=row[0])
-        c += 1
-        ws.cell(row=r,column=c,value=row[1])
-        c = 2
-        r += 1
-
-    data = Reference(ws,min_col=2,max_col=3,min_row=20,max_row=23)
-    labels = Reference(ws,min_col=2,max_col=2,min_row=20,max_row=23)
-
-    pie_chart.add_data(data,titles_from_data=True)
-    pie_chart.set_categories(labels)
-    pie_chart.legend.position = 'b'
-    pie_chart.title = ''
-
-    ws.add_chart(pie_chart,'G9')
-
-    for row in ws['B20':'C23']:
-        for cell in row:
-            cell.value = None
-
-
-def row_thru (outwb,year,month,filename,show_info=False):
+def row_thru (outwb,year,month,filename,first,show_info=False):
     in_file = FILE_DIR + '\\Statistics\\Master\\' + year + '\\Weekly\\' + month + '\\' + filename
     inwb = load_workbook(filename=in_file,data_only=True)
     inws = inwb['Weekly Stats']
 
     ws_name_from_filename = filename.rstrip('.xlsx')
-    outws = find_worksheet(outwb,ws_name_from_filename)
+    outws = None
+    if (first==True): outws = outwb.active
+    else: outws = outwb.create_sheet(title=ws_name_from_filename)
 
-    if (outws == False):
-        outws = outwb.copy_worksheet(outwb['111111'])
-
-    outws.title = ws_name_from_filename
     if (show_info==True): print(outws.title)
-'''
+    create_spreadsheet(outws)
+
     # copy the data
     r = 3; c = 2
     for row in inws['B38':'N41']:
@@ -103,10 +70,6 @@ def row_thru (outwb,year,month,filename,show_info=False):
         c=2
         if (show_info==True): print()
     if (show_info==True): input('Continue? ')
-'''
-    #print(outws._charts)
-
-    #create_pie_chart(outws)
 
 def process_quarter (season='',start_week='',start_month='',start_year='',end_week='',end_month='',end_year='',show_info=False):
     if (season=='' and start_week=='' and start_month=='' and start_year=='' and end_week=='' and end_month=='' and end_year==''):
@@ -115,21 +78,22 @@ def process_quarter (season='',start_week='',start_month='',start_year='',end_we
         season=input('What season are we processing? ')
 
     # set the output file directory and load the workbook
-    out_file = FILE_DIR + '\\Statistics\\Master\\' + end_year + '\\Quarterly\\' + season + ' ' + end_year + '.xlsx'
-    outwb = load_workbook(filename = out_file)
+    out_file_name = FILE_DIR + '\\Statistics\\Master\\' + end_year + '\\Quarterly\\' + season + ' ' + end_year + '.xlsx'
+    outwb = Workbook()
 
     # retrieve the files between the dates selected
     input_files = create_dict_of_inputs(start_week,start_month,start_year,end_week,end_month,end_year)
-
+    first = True
     for year,month_list in input_files.items():
         for month,actual_files in month_list.items():
             for file in actual_files:
                 if (show_info==True): print('Processing: ' + file,end=' ... '); print()
-                row_thru(outwb,year,month,file,show_info)
+                row_thru(outwb,year,month,file,first,show_info)
                 if (show_info==True): print('Done.')
+                first=False
 
 
-    outwb.save(out_file)
+    outwb.save(out_file_name)
 
 
 #create_dict_of_inputs('20','June','2019','9','September','2019',True)
