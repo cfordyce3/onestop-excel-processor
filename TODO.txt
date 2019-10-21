@@ -2,12 +2,12 @@ TO DO:
 
  - Fix for multiple years
 
- - Create gui for process_quarter
  - Create EXE for process_quarter
- 
+
  - Create one program to choose what to do
 
  - Finish README
 
 DONE:
  - Fix some data not being transferred (August 12??)
+ - Create gui for process_quarter
