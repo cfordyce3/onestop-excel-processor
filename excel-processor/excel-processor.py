@@ -1,4 +1,6 @@
-from process_quarter import process_quarter
+import sys
+sys.path.append('..\\')
+from \process_quarter_py_files\process_quarter import process_quarter
 from tkinter import *
 
 WINDOW_WIDTH = 450

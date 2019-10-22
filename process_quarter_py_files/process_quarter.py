@@ -53,7 +53,6 @@ def create_dict_of_inputs (start_week='',start_month='',start_year='',end_week='
 
     else: # start_year != end_year
         year_list = {} # dictionary of years (e.g. {2019:..., 2020:...})
-        month_list = {} # dictionary of months (e.g. {'January':...,'February':...}
         for year in range(int(start_year),int(end_year)+1): # only true if going from one year to the subsequent year
             if (year == int(start_year)):
                 month_list = {}
@@ -97,7 +96,7 @@ def create_dict_of_inputs (start_week='',start_month='',start_year='',end_week='
 
     return inputs
 
-print(create_dict_of_inputs('1','September','2019','20','January','2020'))
+#print(create_dict_of_inputs('1','September','2019','20','January','2020'))
 
 def row_thru (outwb,year,month,filename,first,show_info=False):
     in_file = FILE_DIR + '\\Statistics\\Master\\' + year + '\\Weekly\\' + month + '\\' + filename
@@ -132,7 +131,7 @@ def process_quarter (season='',start_week='',start_month='',start_year='',end_we
         season=input('What season are we processing? ')
 
     # set the output file directory and load the workbook
-    out_file_name = FILE_DIR + '\\Statistics\\Master\\' + end_year + '\\Quarterly\\' + season + ' ' + end_year + '.xlsx'
+    out_file_name = FILE_DIR + '\\Statistics\\Master\\' + start_year + '\\Quarterly\\' + season + ' ' + end_year + '.xlsx'
     outwb = Workbook()
 
     # retrieve the files between the dates selected
@@ -150,5 +149,5 @@ def process_quarter (season='',start_week='',start_month='',start_year='',end_we
 
 
 #create_dict_of_inputs('20','June','2019','9','September','2019',True)
-#process_quarter('Summer_test','20','June','2019','9','September','2019',False)
+#process_quarter('Fall_test','1','December','2019','20','January','2020',True)
 #process_quarter('Test','5','August','2019','26','August','2019',False)
