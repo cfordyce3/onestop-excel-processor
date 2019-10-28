@@ -12,15 +12,3 @@ wrist, and finger tendons had been sacrificed before this was made.
 
 - Chas Fordyce,
   Fall, 2019
-
-+-------------------------------------------+
-| TABLE OF CONTENTS			    |
-| 					    |
-| 1. How to run the program/general info    |
-|   a. Where to put the files               |
-|   b. Which executable do I run?           |
-|   c. Developer mode? What's that?         |
-|                                           |
-| 2. How to update the program              |
-|   a. How to update the years              |
-+-------------------------------------------+
