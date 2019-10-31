@@ -1,13 +1,14 @@
-from process_month import process_month
+from processor.month.process_month import process_month
 from tkinter import *
 
 WINDOW_WIDTH = 400
 WINDOW_HEIGHT = 200
 
-YEARS = ['2019', '2020', '2021',
-         '2022', '2023', '2024',
-         '2025', '2026', '2027',
-         '2028', '2029', '2030']
+YEARS = []
+import datetime
+now_year = datetime.datetime.now().year
+for year in range(-2,6):
+    YEARS.append(now_year + year)
 
 root = Tk()
 
@@ -18,7 +19,7 @@ root.geometry('{}x{}+{}+{}'.format(WINDOW_WIDTH,WINDOW_HEIGHT,pos_right,pos_down
 
 # window title and icon
 root.title('One Stop Excel Processor ~ Monthly')
-root.iconbitmap('scu.ico')
+root.iconbitmap(FILE_DIR + '\\resources\\scu.ico')
 
 # general tabling
 root.grid_columnconfigure(0,weight=1)
@@ -45,18 +46,11 @@ year_menu = OptionMenu(root,year,'2019', '2020', '2021',
                                  '2025', '2026', '2027',
                                  '2028', '2029', '2030').grid(row=1,column=2)
 
-# developer mode check
-#developer_mode = IntVar(root)
-#developer_mode.set(0)
-#developer_mode_check = Checkbutton(root,text='Developer mode',variable=developer_mode).grid(row=2,column=1)
-
 # close button
 Button(root,text='Close',command=root.destroy).grid(row=3,column=1,sticky=W)
 
 def run_process_month (month,year):
     process_month(month,year)
-    #if (developer==1):
-    #    print('Done')
 
 # process button
 Button(root,text='Process',command=lambda:run_process_month(month.get(),year.get())).grid(row=3,column=2,sticky=E) #removed developer_mode.get()

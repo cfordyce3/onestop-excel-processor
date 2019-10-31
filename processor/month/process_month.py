@@ -1,5 +1,5 @@
 import os
-from process_week import process_week
+from processor.week.process_week import process_week
 
 FILE_DIR = os.path.abspath('..')
 

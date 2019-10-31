@@ -1,13 +1,17 @@
-from process_quarter import process_quarter
+from processor.quarter.process_quarter import process_quarter
 from tkinter import *
+import os
+
+FILE_DIR = os.path.abspath('..')
 
 WINDOW_WIDTH = 450
 WINDOW_HEIGHT = 400
 
-YEARS = ['2019', '2020', '2021',
-         '2022', '2023', '2024',
-         '2025', '2026', '2027',
-         '2028', '2029', '2030']
+YEARS = []
+import datetime
+now_year = datetime.datetime.now().year
+for year in range(-2,6):
+    YEARS.append(now_year + year)
 
 root = Tk()
 
@@ -18,7 +22,7 @@ root.geometry('{}x{}+{}+{}'.format(WINDOW_WIDTH,WINDOW_HEIGHT,pos_right,pos_down
 
 # window title and icon
 root.title('One Stop Excel Processor ~ Quarterly')
-root.iconbitmap('scu.ico')
+root.iconbitmap(FILE_DIR + '\\resources\\scu.ico')
 
 # general tabling
 root.grid_columnconfigure(0,weight=1)
@@ -52,10 +56,7 @@ start_month_menu = OptionMenu(root,start_month,'January', 'February', 'March',
 # start year dropdown
 start_year = StringVar(root)
 start_year.set('2019')
-start_year_menu = OptionMenu(root,start_year,'2019', '2020', '2021',
-                                             '2022', '2023', '2024',
-                                             '2025', '2026', '2027',
-                                             '2028', '2029', '2030').grid(row=3,column=1,sticky=E,columnspan=3)
+start_year_menu = OptionMenu(root,start_year,*YEARS).grid(row=3,column=1,sticky=E,columnspan=3)
 
 # end week dropdown
 end_week = StringVar(root)
@@ -73,10 +74,7 @@ end_month_menu = OptionMenu(root,end_month,'January', 'February', 'March',
 # end year dropdown
 end_year = StringVar(root)
 end_year.set('2019')
-end_year_menu = OptionMenu(root,end_year,'2019', '2020', '2021',
-                                         '2022', '2023', '2024',
-                                         '2025', '2026', '2027',
-                                         '2028', '2029', '2030').grid(row=5,column=1,sticky=E,columnspan=3)
+end_year_menu = OptionMenu(root,end_year,*YEARS).grid(row=5,column=1,sticky=E,columnspan=3)
 
 
 # close button

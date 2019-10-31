@@ -1,7 +1,6 @@
 # import required libraries
 import os
 from openpyxl import load_workbook
-from openpyxl.utils.cell import get_column_letter
 
 # set working directory to the directory above where this file is located
 FILE_DIR = os.path.abspath('..')
