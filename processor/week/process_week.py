@@ -2,8 +2,11 @@
 import os
 from openpyxl import load_workbook
 
+import processor
+
 # set working directory to the directory above where this file is located
-FILE_DIR = os.path.abspath('..')
+FILE_DIR = os.path.join(os.path.dirname(processor.__file__),'..') #os.path.abspath('..')
+#print(os.path.exists(FILE_DIR + '\\Statistics\\Master\\2019\\Weekly\\August\\Week of August 5, 2019.xlsx'))
 
 # set variables
 sheet_day = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
@@ -52,12 +55,9 @@ def correct_totals (wb):
     # correct the daily sheets
     for sheet_name in sheet_day:
         ws = wb[sheet_name]
-        #print(sheet_name)
         for x in range(2,15):
             for y in range(51,55):
-                #print(ws.cell(row=y-48,column=x).value,end=' '); print(ws.cell(row=y-39,column=x).value,end=' '); print(ws.cell(row=y-30,column=x).value,end=' '); print(ws.cell(row=y-21,column=x).value,end=' '); print(ws.cell(row=y-12,column=x).value,end=' ')
                 ws.cell(row=y,column=x).value = ws.cell(row=y-48,column=x).value + ws.cell(row=y-39,column=x).value + ws.cell(row=y-30,column=x).value + ws.cell(row=y-21,column=x).value + ws.cell(row=y-12,column=x).value
-            #print ()
 
     # correct the weekly stats section up to the final total section
     multiplier = 0
@@ -137,4 +137,4 @@ def process_week (week='',month='',year='',show_info=False):
 
 
 
-process_week('5','August','2019')
+#process_week('26','August','2019')

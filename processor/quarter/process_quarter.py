@@ -2,7 +2,9 @@ import os
 from openpyxl import Workbook, load_workbook
 from processor.quarter.create_spreadsheet import create_spreadsheet
 
-FILE_DIR = os.path.abspath('..')
+import processor
+
+FILE_DIR = os.path.join(os.path.dirname(processor.__file__),'..') #os.path.abspath('..')
 months = {'January':1,'February':2,'March':3,'April':4,'May':5,'June':6,'July':7,'August':8,'September':9,'October':10,'November':11,'December':12}
 
 def strip_to_day (filename,month_name,year_name):

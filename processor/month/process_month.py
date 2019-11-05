@@ -1,12 +1,11 @@
 import os
 from processor.week.process_week import process_week
 
-FILE_DIR = os.path.abspath('..')
+import processor
+
+FILE_DIR = os.path.join(os.path.dirname(processor.__file__),'..') #os.path.abspath('..')
 
 def process_month (month='',year='',show_info=0):
-    if (month==''): year=input('What year? ')
-    if (month==''): month=input('What month? ')
-
     if (show_info==1):
         print()
         print('Processing data for ' + month + ', ' + str(year) + '... ', end='')
