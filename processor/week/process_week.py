@@ -91,10 +91,6 @@ def correct_totals (wb):
 
 
 def process_week (week='',month='',year='',show_info=False):
-
-    if (week=='' and month=='' and year==''):
-        month=input('What month? '); week=str(input('What week? ')); year=input('What year? ')
-
     if (show_info == True):
         print()
 

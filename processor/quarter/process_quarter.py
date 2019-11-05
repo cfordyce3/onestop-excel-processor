@@ -125,11 +125,6 @@ def row_thru (outwb,year,month,filename,first,show_info=False):
     if (show_info==True): input('Continue? ')
 
 def process_quarter (season='',start_week='',start_month='',start_year='',end_week='',end_month='',end_year='',show_info=False):
-    if (season=='' and start_week=='' and start_month=='' and start_year=='' and end_week=='' and end_month=='' and end_year==''):
-        start_month=input('What starting month? '); start_week=str(input('What starting week? ')); start_year=input('What starting year? ')
-        end_month=input('What ending month? '); end_week=str(input('What ending week? ')); end_year=input('What ending year? ')
-        season=input('What season are we processing? ')
-
     # set the output file directory and load the workbook
     out_file_name = FILE_DIR + '\\Statistics\\Master\\' + start_year + '\\Quarterly\\' + season + ' ' + end_year + '.xlsx'
     outwb = Workbook()
