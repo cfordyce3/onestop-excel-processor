@@ -1,5 +1,8 @@
 import sys
 from cx_Freeze import setup, Executable
+from pathlib import Path
+
+
 
 build_exe_options = {'build_exe':'..\\process_month\\','packages': ['os','tkinter','openpyxl'], 'include_files': ['scu.ico']}
 

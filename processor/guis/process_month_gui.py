@@ -1,8 +1,10 @@
+import os
 from processor.month.process_month import process_month
 from tkinter import *
 
 WINDOW_WIDTH = 400
 WINDOW_HEIGHT = 200
+FILE_DIR = os.path.abspath('..')
 
 YEARS = []
 import datetime

@@ -1,9 +1,11 @@
 import os
 import datetime
 from tkinter import *
+from pathlib import Path
 
-#from processor.week.process_week import process_week
-#from processor.month.process_month import process_month
+
+#from wwprocessor.week.process_week import process_week
+#from wwprocessor.month.process_month import process_month
 
 
 from processor.quarter.process_quarter import process_quarter
@@ -25,7 +27,8 @@ root.geometry('{}x{}+{}+{}'.format(WINDOW_WIDTH,WINDOW_HEIGHT,pos_right,pos_down
 
 # window title and icon
 root.title('One Stop Excel Processor')
-root.iconbitmap(FILE_DIR + '\\resources\\scu.ico')
+root.iconbitmap(FILE_DIR+'\\processor\\resources\\scu.ico')
+# root.iconbitmap('processor/')
 
 # general tabling
 root.grid_columnconfigure(0,weight=1)
