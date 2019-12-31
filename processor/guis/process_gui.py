@@ -1,19 +1,12 @@
 import os
-import datetime
 from tkinter import *
 from pathlib import Path
 
-
-#from wwprocessor.week.process_week import process_week
-#from wwprocessor.month.process_month import process_month
-
-
 from processor.quarter.process_quarter import process_quarter
-from processor.guis.gui_resources import (YEARS,MONTHS,DAYS,
-                                          now_year,now_month,now_day)
+from processor.resources.gui_resources import (YEARS, MONTHS, DAYS,
+                                               now_year, now_month, now_day)
 
 FILE_DIR = os.path.abspath('..')
-#print(FILE_DIR)
 
 WINDOW_WIDTH = 450
 WINDOW_HEIGHT = 400
