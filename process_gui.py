@@ -20,7 +20,7 @@ root.geometry('{}x{}+{}+{}'.format(WINDOW_WIDTH,WINDOW_HEIGHT,pos_right,pos_down
 
 # window title and icon
 root.title('One Stop Excel Processor')
-root.iconbitmap(FILE_DIR+'\\code\\scu.ico')#'\\processor\\resources\\scu.ico'
+if ('scu.ico' in os.listdir()): root.iconbitmap(os.getcwd() + '\\scu.ico')
 
 # general tabling
 root.grid_columnconfigure(0,weight=1)

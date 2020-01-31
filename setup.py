@@ -7,8 +7,8 @@ build_exe_options = {'packages': ['os','tkinter','openpyxl','datetime'], 'includ
 
 exec = Executable('process_gui.py',
                   targetName = 'excel_processor.exe',
-                  base = base,
-                  icon = 'scu.ico')
+                  base = base)
+                  #icon = 'scu.ico')
 
 setup (name = 'Quarterly Excel Processor',
        version = '1.0',
