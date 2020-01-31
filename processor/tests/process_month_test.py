@@ -1,1 +1,0 @@
-from processor.month.process_month import process_month

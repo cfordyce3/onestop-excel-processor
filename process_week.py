@@ -1,12 +1,10 @@
 # import required libraries
 import os
 from openpyxl import load_workbook
-
-import processor
+from resources import get_stats_folder
 
 # set working directory to the directory above where this file is located
-FILE_DIR = os.path.join(os.path.dirname(processor.__file__),'..') #os.path.abspath('..')
-#print(os.path.exists(FILE_DIR + '\\Statistics\\Master\\2019\\Weekly\\August\\Week of August 5, 2019.xlsx'))
+FILE_DIR = get_stats_folder()
 
 # set variables
 sheet_day = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
@@ -84,12 +82,6 @@ def correct_totals (wb):
                 ws.cell(row=y,column=x).value = ws.cell(row=y-3,column=x).value + ws.cell(row=y-2,column=x).value + ws.cell(row=y-1,column=x).value
 
 
-#wb = load_workbook(filename=str(FILE_DIR + '\\Statistics\\Master\\2019\\Weekly\\August\\Week of August 5, 2019.xlsx'),data_only=True)
-#correct_totals(wb)
-#wb.save(str(FILE_DIR + '\\Statistics\\Master\\2019\\Weekly\\August\\Week of August 5, 2019_1.xlsx'))
-
-
-
 def process_week (week='',month='',year='',show_info=False):
     if (show_info == True):
         print()
@@ -135,6 +127,4 @@ def process_week (week='',month='',year='',show_info=False):
     save_file = FILE_DIR + '\\Statistics\\Master\\' + year + '\\Weekly\\' + month + '\\Week of ' + month + ' ' + week + ', ' + year + '.xlsx'
     outwb.save(save_file)
 
-
-
-#process_week('26','August','2019')
+process_week('5','August','2019')

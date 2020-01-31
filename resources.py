@@ -1,4 +1,5 @@
 import datetime
+import os
 
 now = datetime.datetime.now()
 
@@ -24,3 +25,15 @@ DAYS = ['1','2','3','4','5','6','7','8','9','10',
         '11','12','13','14','15','16','17','18','19','20',
         '21','22','23','24','25','26','27','28','29','30',
         '31']
+
+# find the Statistics folder to start the working
+def get_stats_folder ():
+    found = False
+    count = 0 # just to make sure no infinite loops occur, including a counter; it should not happen regardless
+    while (found == False and count < 20):
+        if ("Statistics" in os.listdir()):
+            found = True
+        else:
+            os.chdir('..')
+            count+=1
+    return os.getcwd()

@@ -1,10 +1,10 @@
 import os
 from openpyxl import Workbook, load_workbook
-from processor.quarter.create_spreadsheet import create_spreadsheet
+from create_spreadsheet import create_spreadsheet
+from process_month import process_month
+from resources import get_stats_folder
 
-import processor
-
-FILE_DIR = os.path.join(os.path.dirname(processor.__file__),'..') #os.path.abspath('..')
+FILE_DIR = get_stats_folder()
 months = {'January':1,'February':2,'March':3,'April':4,'May':5,'June':6,'July':7,'August':8,'September':9,'October':10,'November':11,'December':12}
 
 def strip_to_day (filename,month_name,year_name):
@@ -28,6 +28,7 @@ def sort_weeks (weeks,month_name,year_name):
     return sorted_weeks
 
 def create_dict_of_inputs (start_week='',start_month='',start_year='',end_week='',end_month='',end_year='',show_info=False):
+
     start_month_val = months[start_month]
     end_month_val = months[end_month]
 
@@ -128,7 +129,7 @@ def row_thru (outwb,year,month,filename,first,show_info=False):
 
 def process_quarter (season='',start_week='',start_month='',start_year='',end_week='',end_month='',end_year='',show_info=False):
     # set the output file directory and load the workbook
-    out_file_name = FILE_DIR + '\\Statistics\\Master\\' + start_year + '\\Quarterly\\' + season + ' ' + end_year + '.xlsx'
+    out_file_name = FILE_DIR + '\\Statistics\\Master\\' + start_year + '\\Quarterly\\' + season + ' ' + start_year + '.xlsx'
     outwb = Workbook()
 
     # retrieve the files between the dates selected
@@ -136,6 +137,7 @@ def process_quarter (season='',start_week='',start_month='',start_year='',end_we
     first = True
     for year,month_list in input_files.items():
         for month,actual_files in month_list.items():
+            process_month(month,year)
             for file in actual_files:
                 if (show_info==True): print('Processing: ' + file,end=' ... '); print()
                 row_thru(outwb,year,month,file,first,show_info)
@@ -146,5 +148,5 @@ def process_quarter (season='',start_week='',start_month='',start_year='',end_we
 
 
 #create_dict_of_inputs('20','June','2019','9','September','2019',True)
-#process_quarter('Fall_test','1','December','2019','20','January','2020',True)
+#process_quarter('Fall_test','16','September','2019','31','December','2019',False)
 #process_quarter('Test','5','August','2019','26','August','2019',False)

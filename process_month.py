@@ -1,9 +1,8 @@
 import os
-from processor.week.process_week import process_week
+from process_week import process_week
+from resources import get_stats_folder
 
-import processor
-
-FILE_DIR = os.path.join(os.path.dirname(processor.__file__),'..') #os.path.abspath('..')
+FILE_DIR = get_stats_folder()
 
 def process_month (month='',year='',show_info=0):
     if (show_info==1):
@@ -28,6 +27,5 @@ def process_month (month='',year='',show_info=0):
         print()
         print('Data for ' + month + ', ' + str(year) + ' has been completed.')
         print()
-
 
 #process_month('August','2019',0)
