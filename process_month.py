@@ -11,13 +11,13 @@ def process_month (month='',year='',show_info=0):
 
     files = []
 
-    for file in os.listdir(FILE_DIR + '\\Statistics\\Master\\' + str(year) + '\\Weekly\\' + month):
+    for file in os.listdir(FILE_DIR + '\\Statistics\\Master\\' + '\\Weekly\\' + str(year) + '\\' + month):
         day = file.strip('Week of ' + month + ' '); day = day.rstrip(str(year) + '.xlsx'); day = day.strip(", ")
         files.append([str(day),str(month),str(year)])
         #print(files)
 
     for file in files:
-        process_week(file[0],file[1],file[2])
+        process_week(file[0],file[1],file[2],show_info)
 
     if (show_info==1):
         print('Done.')
@@ -28,4 +28,4 @@ def process_month (month='',year='',show_info=0):
         print('Data for ' + month + ', ' + str(year) + ' has been completed.')
         print()
 
-#process_month('August','2019',0)
+#process_month('December','2019', 1)

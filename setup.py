@@ -1,17 +1,9 @@
-import sys
-from cx_Freeze import setup, Executable
+from distutils.core import setup
+#from glob import glob
+import py2exe
 
-base = 'Win32GUI'
-
-build_exe_options = {'packages': ['os','tkinter','openpyxl','datetime'], 'include_files': ['scu.ico']}
-
-exec = Executable('process_gui.py',
-                  targetName = 'excel_processor.exe',
-                  base = base)
-                  #icon = 'scu.ico')
-
-setup (name = 'Quarterly Excel Processor',
-       version = '1.0',
-       description = 'Process Full Quarters in Excel for the One Stop Office',
-       options = {'build_exe':build_exe_options},
-       executables = [exec])
+#data_files = [("Microsoft.VC90.CRT", glob(r'C:\Program Files\Microsoft Visual Studio 9.0\VC\redist\x86\Microsoft.VC90.CRT\*.*'))]
+setup(
+    #data_files=data_files,
+    windows=[{'script': 'process_gui.py'}],
+)

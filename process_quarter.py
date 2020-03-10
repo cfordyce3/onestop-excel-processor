@@ -40,7 +40,7 @@ def create_dict_of_inputs (start_week='',start_month='',start_year='',end_week='
         for month_name,month_num in months.items(): # go through each month
             day_list = [] # list of specific week per month (e.g. ['Week of January 1, 2019.xlsx', 'Week of January 8, 2019.xlsx'...])
             if (month_num >= start_month_val and month_num <= end_month_val): # if the month is within the starting month and the ending month (one year only)
-                for file in os.listdir(FILE_DIR + '\\Statistics\\Master\\' + str(start_year) + '\\Weekly\\' + month_name):
+                for file in os.listdir(FILE_DIR + '\\Statistics\\Master\\' + '\\Weekly\\' + str(start_year) + '\\'+ month_name):
                     day = strip_to_day(file,month_name,start_year)
                     if (month_name != start_month and month_name != end_month):
                         day_list.append(file)
@@ -63,7 +63,7 @@ def create_dict_of_inputs (start_week='',start_month='',start_year='',end_week='
                     day_list = [] # list of specific week per month (e.g. ['Week of January 1, 2019.xlsx', 'Week of January 8, 2019.xlsx'...])
                     if (month_num < start_month_val): continue
                     if (month_num >= start_month_val and month_num <= 12):
-                        for file in os.listdir(FILE_DIR + '\\Statistics\\Master\\' + str(year) + '\\Weekly\\' + month_name):
+                        for file in os.listdir(FILE_DIR + '\\Statistics\\Master\\' + '\\Weekly\\' + str(year) + '\\' + month_name):
                             day = strip_to_day(file,month_name,str(year))
                             if (month_name != start_month and month_name != end_month):
                                 day_list.append(file)
@@ -81,7 +81,7 @@ def create_dict_of_inputs (start_week='',start_month='',start_year='',end_week='
                     day_list = [] # list of specific week per month (e.g. ['Week of January 1, 2019.xlsx', 'Week of January 8, 2019.xlsx'...])
                     if (month_num > end_month_val): continue
                     if (month_num <= end_month_val): # if the month is within the starting month and the ending month (one year only)
-                        for file in os.listdir(FILE_DIR + '\\Statistics\\Master\\' + str(year) + '\\Weekly\\' + month_name):
+                        for file in os.listdir(FILE_DIR + '\\Statistics\\Master\\' + '\\Weekly\\' + str(year) + '\\' + month_name):
                             day = strip_to_day(file,month_name,str(year))
                             if (month_name != start_month and month_name != end_month):
                                 day_list.append(file)
@@ -102,7 +102,7 @@ def create_dict_of_inputs (start_week='',start_month='',start_year='',end_week='
 #print(create_dict_of_inputs('1','September','2019','20','January','2020'))
 
 def row_thru (outwb,year,month,filename,first,show_info=False):
-    in_file = FILE_DIR + '\\Statistics\\Master\\' + year + '\\Weekly\\' + month + '\\' + filename
+    in_file = FILE_DIR + '\\Statistics\\Master\\' + '\\Weekly\\' + year + '\\' + month + '\\' + filename
     inwb = load_workbook(filename=in_file,data_only=True)
     inws = inwb['Weekly Stats']
 
@@ -129,7 +129,7 @@ def row_thru (outwb,year,month,filename,first,show_info=False):
 
 def process_quarter (season='',start_week='',start_month='',start_year='',end_week='',end_month='',end_year='',show_info=False):
     # set the output file directory and load the workbook
-    out_file_name = FILE_DIR + '\\Statistics\\Master\\' + start_year + '\\Quarterly\\' + season + ' ' + start_year + '.xlsx'
+    out_file_name = FILE_DIR + '\\Statistics\\Master\\' + '\\Quarterly\\'+ start_year + '\\' + season + ' ' + start_year + '.xlsx'
     outwb = Workbook()
 
     # retrieve the files between the dates selected

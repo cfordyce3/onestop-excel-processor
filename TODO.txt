@@ -1,4 +1,0 @@
-TO DO:
-
- - Reorganize into package-subpackage system
- - Finish README
