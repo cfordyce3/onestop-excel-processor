@@ -82,11 +82,11 @@ def correct_totals (wb):
                 ws.cell(row=y,column=x).value = ws.cell(row=y-3,column=x).value + ws.cell(row=y-2,column=x).value + ws.cell(row=y-1,column=x).value
 
 
-def process_week (week='',month='',year='',show_info=False):
+def process_week (week='',month='',year='',show_info=True):
     if (show_info == True):
         print()
 
-    out_file = FILE_DIR + '\\Statistics\\Master\\' + '\\Weekly\\' + year + '\\' + month + '\\Week of ' + month + ' ' + week + ', ' + year + '.xlsx'
+    out_file = FILE_DIR + '\\Statistics\\Masters\\Weekly\\' + year + '\\' + month + '\\Week of ' + month + ' ' + week + ', ' + year + '.xlsx'
     outwb = load_workbook(filename = out_file)
 
     if (show_info == True):
@@ -124,7 +124,7 @@ def process_week (week='',month='',year='',show_info=False):
     correct_totals(outwb)
 
     # determine save file and saves file
-    save_file = FILE_DIR + '\\Statistics\\Master\\' + '\\Weekly\\' + year + '\\' + month + '\\Week of ' + month + ' ' + week + ', ' + year + '.xlsx'
+    save_file = FILE_DIR + '\\Statistics\\Masters\\Weekly\\' + year + '\\' + month + '\\Week of ' + month + ' ' + week + ', ' + year + '.xlsx'
     outwb.save(save_file)
 
 #process_week('5','August','2019')
